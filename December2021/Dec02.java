@@ -29,3 +29,55 @@ n == number of nodes in the linked list
 0 <= n <= 104
 -106 <= Node.val <= 106
 */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null || head.next == null || head.next.next == null)
+            return head;
+        
+        ListNode oh = new ListNode(-1), eh = new ListNode(-1);//odd head & even head
+        ListNode odd = oh, even = eh, curr = head, forw = null;
+        
+        while(curr != null && curr.next != null){//pair of odd & even exists
+            forw = curr.next.next;
+            
+            //link
+            odd.next = curr;
+            even.next = curr.next;
+            
+            //move
+            odd = odd.next;
+            even = even.next;
+            
+            
+            //update
+            curr = forw;
+        }
+        
+        if(curr != null)//extra odd node exist
+        {
+            odd.next = curr;
+            odd = odd.next;
+        }
+        even.next = null;
+        
+        //remove dummy heads
+        oh = oh.next;
+        eh = eh.next;
+        
+        //link odd & eve LL
+        odd.next = eh;
+        
+        return oh;
+    }
+}

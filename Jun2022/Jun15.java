@@ -1,15 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './MyComponenets/about/about.component';
-import { TodosComponent } from './MyComponenets/todos/todos.component';
-
-const routes: Routes = [
-  {path:'', component:TodosComponent},
-  {path:'about', component:AboutComponent}
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+<div class="my-3">
+    <h5 [ngClass]="{'strike': !todo.active}">{{todo.title}}</h5>
+    <p [ngClass]="{'strike': !todo.active}">{{todo.desc}}</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (click)="onCheckBoxClick(todo)" [checked] = "!todo.active">
+        <label class="form-check-label" for="todo{{i}}">Done</label>
+      </div>
+    <button class="btn btn-sm btn-danger" (click) = "onClick(todo)">Delete</button>
+</div> 

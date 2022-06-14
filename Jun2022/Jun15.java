@@ -1,28 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output, TypeDecorator } from '@angular/core';
-import { Todo } from 'src/app/Todo';
-
-@Component({
-  selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
-})
-export class TodoItemComponent implements OnInit {
-  @Input()
-  todo: Todo = new Todo;
-  @Input()
-  i!: number;
-  @Output() todoDelete : EventEmitter<Todo> = new EventEmitter();
-  @Output() todoCheckBox : EventEmitter<Todo> = new EventEmitter();
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  onClick(todo : Todo){
-    this.todoDelete.emit(todo);
-    console.log("Click has been triggered");
-  }
-  onCheckBoxClick(todo : Todo){
-    this.todoCheckBox.emit(todo);
-  }
-}
+<div class="my 3">
+    <h4>Add a Todo</h4>
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title" class="form">Todo Title</label>
+            <input type="text" [(ngModel)]="title" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label class="form" for="desc">Todo Description</label>
+            <input type="text" [(ngModel)]="desc" class="form-control" id="desc" name="desc">
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary">Add Todo</button>
+    </form>    
+</div>

@@ -1,13 +1,46 @@
-<div class="container">
-    <h1 class="text-center mb-5">Todo List By Harsh</h1>
-<app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
-<div class="my-4">
-    <h4>Your Todos</h4>
-    <div *ngIf="this.todos.length===0; else elseBlock">No Todos to display</div>
-    <ng-template #elseBlock>
-        <div *ngFor = "let todo of todos; index as i">
-            <app-todo-item [todo] = "todo" [i]="i" (todoDelete)="deleteTodo($event)" (todoCheckBox)="toggleTodo($event)"></app-todo-item>
-        </div> 
-    </ng-template>
-</div>
-</div>
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Todo } from "../../Todo";
+
+@Component({
+  selector: 'app-todos',
+  templateUrl: './todos.component.html',
+  styleUrls: ['./todos.component.css']
+})
+export class TodosComponent implements OnInit {
+  todos : Todo[];
+  localItem;
+
+  constructor() {
+    this.localItem = localStorage.getItem("todos");
+    if(this.localItem==null){
+      this.todos = []
+    }else{
+      this.todos = JSON.parse(this.localItem);
+    }
+   }
+
+  ngOnInit(): void {
+  }
+
+
+  deleteTodo(todo : Todo){
+    console.log(todo);
+    const index = this.todos.indexOf(todo);
+    this.todos.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+
+  addTodo(todo : Todo){
+    console.log(todo);
+    this.todos.push(todo);
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+
+  toggleTodo(todo : Todo){
+    console.log(todo);
+    const index = this.todos.indexOf(todo);
+    this.todos[index].active = !this.todos[index].active;
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+}

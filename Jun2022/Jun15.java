@@ -1,9 +1,28 @@
-<div class="my-3">
-    <h5 [ngClass]="{'strike': !todo.active}">{{todo.title}}</h5>
-    <p [ngClass]="{'strike': !todo.active}">{{todo.desc}}</p>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (click)="onCheckBoxClick(todo)" [checked] = "!todo.active">
-        <label class="form-check-label" for="todo{{i}}">Done</label>
-      </div>
-    <button class="btn btn-sm btn-danger" (click) = "onClick(todo)">Delete</button>
-</div> 
+import { Component, EventEmitter, Input, OnInit, Output, TypeDecorator } from '@angular/core';
+import { Todo } from 'src/app/Todo';
+
+@Component({
+  selector: 'app-todo-item',
+  templateUrl: './todo-item.component.html',
+  styleUrls: ['./todo-item.component.css']
+})
+export class TodoItemComponent implements OnInit {
+  @Input()
+  todo: Todo = new Todo;
+  @Input()
+  i!: number;
+  @Output() todoDelete : EventEmitter<Todo> = new EventEmitter();
+  @Output() todoCheckBox : EventEmitter<Todo> = new EventEmitter();
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onClick(todo : Todo){
+    this.todoDelete.emit(todo);
+    console.log("Click has been triggered");
+  }
+  onCheckBoxClick(todo : Todo){
+    this.todoCheckBox.emit(todo);
+  }
+}

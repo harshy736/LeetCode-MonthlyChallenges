@@ -1,28 +1,21 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Todos</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">Link</a>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TodosComponent } from './MyComponenets/todos/todos.component';
-import { TodoItemComponent } from './MyComponenets/todo-item/todo-item.component';
-import { AddTodoComponent } from './MyComponenets/add-todo/add-todo.component';
-import { FormsModule } from '@angular/forms';
-import { AboutComponent } from './MyComponenets/about/about.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    TodosComponent,
-    TodoItemComponent,
-    AddTodoComponent,
-    AboutComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+<router-outlet></router-outlet>
